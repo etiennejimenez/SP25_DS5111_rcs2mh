@@ -26,4 +26,6 @@ index.html:
 
 title.txt:
 	cat index.html | grep Example > title.txt
-	
+
+lint:
+	pylint bin/sample_code.py
