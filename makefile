@@ -29,3 +29,10 @@ title.txt:
 
 lint:
 	pylint bin/sample_code.py
+
+test: lint
+	pytest -vvx tests
+
+final_git_push: lint test
+	git push
+
