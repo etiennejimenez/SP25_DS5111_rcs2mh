@@ -50,7 +50,7 @@ class GainerProcessWSJ(GainerProcess):
         wsj = wsj.rename(columns = {'Unnamed: 0': 'symbol',
                                     'Last': 'price',
                                     'Chg': 'price_change',
-                                    '% Chg': 'price_percent_change'})
+                                    '% Chg': 'price_percent_change'}).reset_index(drop=True)
 
         assert isinstance(wsj['price'], pd.Series), f"expected pandas Series but got {type(wsj['price'])}"
         assert isinstance(wsj['price_change'][0], float), f"expected list of floats but first value is {type(wsj['price_change'])}"
