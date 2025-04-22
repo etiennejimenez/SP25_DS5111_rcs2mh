@@ -26,4 +26,13 @@ index.html:
 
 title.txt:
 	cat index.html | grep Example > title.txt
-	
+
+lint:
+	. env/bin/activate; pylint bin/sample_code.py
+
+test: lint
+	. env/bin/activate; pytest -vvx tests
+
+final_git_push: lint test
+	git push
+
