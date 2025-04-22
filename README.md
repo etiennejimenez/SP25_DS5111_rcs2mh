@@ -32,6 +32,7 @@ where you will rewrite your user and name information to be your own email addre
 
 Now, to get up to date with everything, you will clone this repository by running the following code on your terminal:
 
+[![Feature Validation](https://github.com/etiennejimenez/SP25_DS5111_rcs2mh/actions/workflows/validations.yml/badge.svg?branch=main)](https://github.com/etiennejimenez/SP25_DS5111_rcs2mh/actions/workflows/validations.yml)
 git clone git@github.com:etiennejimenez/SP25_DS5111_rcs2mh.git
 
 so that all the remaining steps can be easily recreated by running some scripts already present on this repo. The first of these is going to be `bash init.sh`.
