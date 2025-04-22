@@ -4,9 +4,10 @@ Downloads, processes, and timestamps Yahoo gainers before saving them
 import os
 from datetime import datetime
 import pandas as pd
+from bin.gainers.base import GainerProcess#, GainerDownload
 from bin.gainers.download import GainerDownload
-from bin.gainers.process import GainerProcess
 
+# pylint: disable=too-few-public-methods
 class GainerDownloadYahoo(GainerDownload):
     """
     Downloads Yahoo gainers in HTML format.
@@ -43,6 +44,8 @@ class GainerProcessYahoo(GainerProcess):
         """
         Normalizes Yahoo gainers in a CSV file
         """
+        df = pd.read_csv('ygainers.csv')
+        csv_norm = pd.DataFrame()
         norm = df[['Symbol', 'Price', 'Change', 'Change %']]
         norm = norm.rename(columns = {'Symbol': 'symbol',
                                       'Price': 'price',
@@ -53,14 +56,16 @@ class GainerProcessYahoo(GainerProcess):
         assert isinstance(norm['price_change'][0], float), f"expected list of floats but first value is {type(norm['price_change'])}"
         assert len(norm['symbol']) > 1, "symbol list should not be empty!"
 
-        norm['price'] = norm['price'].str.extract(r'([^ ]+)')
-        norm['price'] = [x.replace(",", "") for x in norm['price']]
-        norm['price'] = [float(x) for x in norm['price']]
+        #norm['price'] = norm['price'].str.extract(r'([^ ]+)')
+        #norm['price'] = [x.replace(",", "") for x in norm['price'] if isinstance(x, str)]
+        
+        norm['price'] = norm['price'].astype(str).str.extract(r'([^ ]+)')[0].str.replace(',', '').astype(float)
+        #norm['price'] = [float(x) for x in norm['price'] if isinstance(x, str)]
 
         norm['price_percent_change'] = norm['price_percent_change'].replace({r'\+': '', r'\%': ''}, regex=True)
         norm['price_percent_change'] = [float(x) for x in norm['price_percent_change']]
 
-        csv_norm = norm.to_csv(f"{csv}_norm.csv")
+        csv_norm = norm.to_csv('ygainers_norm.csv')
 
     def save_with_timestamp(self):
         """

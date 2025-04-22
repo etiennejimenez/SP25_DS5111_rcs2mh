@@ -35,7 +35,11 @@ test: lint
 	. env/bin/activate; pytest -vvx tests
 	
 gainers:
-	. env/bin/activate; python main.py ${which}
+	. env/bin/activate; python main.py ${SRC}
+
+clean:
+	rm ygainers.* || true
+	rm wsjgainers.* || true
 
 final_git_push: lint test
 	git push

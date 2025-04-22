@@ -1,7 +1,7 @@
 """
 Base class to process commands
 """
-
+# pylint: disable=too-few-public-methods
 class GainerProcess:
     """
     Class to process commands

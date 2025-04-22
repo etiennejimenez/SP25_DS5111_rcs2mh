@@ -4,9 +4,10 @@ Downloads, processes, and timestamps WSJ gainers before saving them.
 import os
 from datetime import datetime
 import pandas as pd
+from bin.gainers.base import GainerProcess
 from bin.gainers.download import GainerDownload
-from bin.gainers.process import GainerProcess
 
+# pylint: disable=too-few-public-methods
 class GainerDownloadWSJ(GainerDownload):
     """
     Downloads WSJ gainers in HTML format
@@ -43,22 +44,22 @@ class GainerProcessWSJ(GainerProcess):
         """
         Normalizes WSJ gainers in a CSV file
         """
-
         df = pd.read_csv('wsjgainers.csv')
+        csv_norm = pd.DataFrame()
         wsj = df[['Unnamed: 0', 'Last', 'Chg', '% Chg']]
         wsj = wsj.rename(columns = {'Unnamed: 0': 'symbol',
                                     'Last': 'price',
                                     'Chg': 'price_change',
                                     '% Chg': 'price_percent_change'})
 
-        assert isinstance(wsj['price'], pd.Series), f"expected pandas Series but got {type(norm['price'])}"
-        assert isinstance(wsj['price_change'][0], float), f"expected list of floats but first value is {type(norm['price_change'])}"
+        assert isinstance(wsj['price'], pd.Series), f"expected pandas Series but got {type(wsj['price'])}"
+        assert isinstance(wsj['price_change'][0], float), f"expected list of floats but first value is {type(wsj['price_change'])}"
         assert len(wsj['symbol']) > 1, "symbol list should not be empty!"
 
         wsj['symbol'] = wsj['symbol'].str.extract(r"\(([^)]+)\)")
 
-        csv_norm = wsj.to_csv(f"{csv}_norm.csv")
-    
+        csv_norm = wsj.to_csv('wsjgainers_norm.csv')
+
     def save_with_timestamp(self):
         """
         Saves the WSJ gainers CSV with a timestamp.
