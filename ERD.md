@@ -26,6 +26,7 @@ The normalized CSV files were uploaded from the Ubuntu system to a cloud-based S
 The Entity-Relationship (ER) diagram below illustrates the structure of our database, which is designed to provide deeper insights into stock data. At this stage, the data is limited to gainer lists sourced from the Wall Street Journal and Yahoo Finance. However, the design allows for future expansion to include a broader range of stocks from the overall market.
 
 ```mermaid
+ERDiagram
     YAHOO_GAINERS ||--o{ RAW_DATA : is_imported_to
     YAHOO_GAINERS {
         string symbol
