@@ -27,37 +27,37 @@ The Entity-Relationship (ER) diagram below illustrates the structure of our data
 
 ```mermaid
 erDiagram
-    YAHOO_GAINERS ||--o{ RAW_DATA : is_imported_to
-    YAHOO_GAINERS {
+    "Yahoo Gainers" ||--o{ "Raw Data" : is_imported_to
+    "Yahoo Gainers" {
         string symbol
         float price
         float price_change
         float price_change_percent
     }
-    WSJ_GAINERS ||--o{ RAW_DATA : is_imported_to
-    WSJ_GAINERS {
+    "WSJ Gainers" ||--o{ "Raw Data" : "is imported to"
+    "WSJ Gainers" {
         string symbol
         float price
         float price_change
         float price_change_percent
     }
-    RAW_DATA ||--|{ PRICE_DISTRIBUTION : gives-insight_about
-    RAW_DATA ||--|{ UNIQUE_STOCKS : gives-insight_about
-    RAW_DATA {
+    "Raw Data" ||--|{ "Price Distribution" : "gives insight about"
+    "Raw Data" ||--|{ "Unique Stocks" : "gives insight about"
+    "Raw Data" {
         string symbol
         float price
         float price_change
         float price_change_percent
     
     }
-    PRICE_DISTRIBUTION {
+    "Price Distribution" {
         string symbol
         float min_value
         float max_value
         float avg_price
         float median_price
     }
-    UNIQUE_STOCKS {
+    "Unique Stocks" {
         string symbol
         int number_of_repetitions
     }
