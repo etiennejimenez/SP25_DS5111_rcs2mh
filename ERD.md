@@ -8,7 +8,7 @@ This report presents the structure of the database developed for our project. Th
 ## Case 1: Price Distribution
 To gain insights into the price behavior of gainer stocks, we compute key statistical measures such as minimum, average, median, and maximum prices recorded while the stocks were on the gainer list. This information is captured in the `Price_Distribution` table.
 
-## Use Case 2: Frequency of Appearance on the Gainer List
+## Case 2: Frequency of Appearance on the Gainer List
 Understanding the consistency of a stock's appearance on the gainer list can reveal patterns of sustained growth versus isolated spikes. Is a stock steadily increasing in value, or is it experiencing a brief surge? The `Unique_Stocks` table addresses this by listing each stock along with the number of times it appeared on the gainer list.
 
 # Methods
