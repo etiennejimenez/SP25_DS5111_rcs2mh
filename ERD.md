@@ -27,7 +27,7 @@ The Entity-Relationship (ER) diagram below illustrates the structure of our data
 
 ```mermaid
 erDiagram
-    "Yahoo Gainers" ||--o{ "Raw Data" : is imported to
+    "Yahoo Gainers" ||--o{ "Raw Data" : "is imported to"
     "Yahoo Gainers" {
         string symbol
         float price
