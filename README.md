@@ -8,9 +8,11 @@ Now you have generated a new SSH key in your VM, we will run the command `cat id
 
 To check that everything so far has worked correctly, run the command `ssh -T -i ed25519 git@github.com` on the terminal, and you should see your Github name echoed back to you:
 
-`ubuntu@ip-172-31-83-121:~/.ssh$  ssh -T -i id_ed25519 git@github.com
+```
+ubuntu@ip-172-31-83-121:~/.ssh$  ssh -T -i id_ed25519 git@github.com
 Hi etiennejimenez! You've successfully authenticated, but GitHub does not provide shell access.
-ubuntu@ip-172-31-83-121:~/.ssh$`
+ubuntu@ip-172-31-83-121:~/.ssh$
+```
 
 Now we can move on to set up the credentials. To do this, we will type `vim 00_01_setup_git_global_creds.sh`, press `I` on your keyboard to insert text, and copy and paste the following code inside it:
 
@@ -31,11 +33,22 @@ git config --global --list
 where you will rewrite your user and name information to be your own email address and Github username, respectively. Press the ESC key on your keyboard and type `:wq` to save and exit your changes on VIM. To finish setting up global creds, run this code using `bash 00_01_setup_git_global_creds.sh`. To check that everything went smoothly, run the line `git status` into the terminal, and you should see that the server acknowledges your username and your repository name.
 
 Now, to get up to date with everything, you will clone this repository by running the following code on your terminal:
-
-[![Feature Validation](https://github.com/etiennejimenez/SP25_DS5111_rcs2mh/actions/workflows/validations.yml/badge.svg?branch=main)](https://github.com/etiennejimenez/SP25_DS5111_rcs2mh/actions/workflows/validations.yml)
+```
 git clone git@github.com:etiennejimenez/SP25_DS5111_rcs2mh.git
+```
 
-so that all the remaining steps can be easily recreated by running some scripts already present on this repo. The first of these is going to be `bash init.sh`.
+so that all the remaining steps can be easily recreated by running some scripts already present on this repo. The first of these is going to be `init.sh`, so go ahead and type the line `vim init.sh` and paste the following code in it:
+
+```
+sudo apt update
+sudo apt install make -y
+sudo apt install python3.12-venv -y
+sudo apt install tree
+```
+
+This is a one-time code that will install all the necessary updates to our machines, and bring all versions to their newest snapshots. Also, it will create the virtual environment where we will then run Python and make use of our makefile - an efficient way to run automated commands and keep important scripts in check. 
+
 
 
  
+[![Feature Validation](https://github.com/etiennejimenez/SP25_DS5111_rcs2mh/actions/workflows/validations.yml/badge.svg?branch=main)](https://github.com/etiennejimenez/SP25_DS5111_rcs2mh/actions/workflows/validations.yml)
