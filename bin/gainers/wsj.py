@@ -22,7 +22,7 @@ class GainerDownloadWSJ(GainerDownload):
         Method to download WSJ gainers HTML
         """
         command = """sudo google-chrome-stable \
-                  --headless --disable-gpu --dump-dom --no-sandbox --timeout=5000 \
+                  --headless --disable-gpu --dump-dom --no-sandbox --timeout=10000 \
                   'https://www.wsj.com/market-data/stocks/us/movers' > wsjgainers.html"""
         os.system(command)
         convert_command = """python -c 'import pandas as pd; \
