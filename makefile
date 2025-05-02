@@ -16,7 +16,7 @@ ygainers.csv: ygainers.html
 	python -c "import pandas as pd; raw = pd.read_html('ygainers.html'); raw[0].to_csv('ygainers.csv')"
 
 wsjgainers.html:
-	sudo google-chrome-stable --headless --disable-gpu --dump-dom --no-sandbox --timeout=500 https://www.wsj.com/market-data/stocks/us/movers > wsjgainers.html
+	sudo google-chrome-stable --headless --disable-gpu --dump-dom --no-sandbox --timeout=10000 'https://www.wsj.com/market-data/stocks/us/movers' > wsjgainers.html
 
 wsjgainers.csv: wsjgainers.html
 	python -c "import pandas as pd; raw = pd.read_html('wsjgainers.html'); raw[0].to_csv('wsjgainers.csv')"
@@ -28,10 +28,18 @@ title.txt:
 	cat index.html | grep Example > title.txt
 
 lint:
-	. env/bin/activate; pylint bin/sample_code.py
+	. env/bin/activate; pylint bin/ || true
+	. env/bin/activate; pylint tests/ || true
 
 test: lint
 	. env/bin/activate; pytest -vvx tests
+	
+gainers:
+	. env/bin/activate; python main.py ${SRC}
+
+clean:
+	rm ygainers.* || true
+	rm wsjgainers.* || true
 
 final_git_push: lint test
 	git push

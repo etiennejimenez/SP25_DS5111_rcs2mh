@@ -21,3 +21,5 @@ tomlkit==0.13.2
 typing_extensions==4.13.2
 tzdata==2025.2
 webencodings==0.5.1
+dbt-core
+dbt-snowflake
